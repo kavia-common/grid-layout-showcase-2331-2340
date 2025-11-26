@@ -46,12 +46,12 @@ function App() {
       <Navbar theme={theme} onToggleTheme={toggleTheme} />
 
       <main className="flex-1" role="main" aria-label="Grid layout showcase main content">
-        <div className="bg-gradient-to-br from-blue-500/10 to-gray-50">
+        <div className="bg-app-gradient">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
-            <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900">
+            <h1 className="text-2xl sm:text-3xl font-semibold text-[color:var(--color-text)]">
               Grid Layout Showcase
             </h1>
-            <p className="mt-2 text-sm text-gray-600 max-w-2xl">
+            <p className="mt-2 text-sm text-[color:var(--color-text-subtle)] max-w-2xl">
               Experiment with a responsive grid. Adjust columns, gaps, and row height. Cards below
               update instantly.
             </p>

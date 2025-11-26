@@ -17,7 +17,7 @@ export default function GridCard({
 }) {
   /** A simple card to visualize grid items with optional demo content. */
   return (
-    <div className="relative rounded-lg border border-gray-200 bg-white shadow-sm overflow-hidden">
+    <div className="relative rounded-lg border border-subtle bg-white shadow-sm overflow-hidden">
       <div
         className="absolute inset-x-0 top-0 h-1"
         style={{
@@ -27,23 +27,23 @@ export default function GridCard({
       />
       <div className="p-4">
         <div className="flex items-center justify-between">
-          <h3 className="text-sm font-semibold text-gray-900">{title}</h3>
-          <span className="text-[10px] px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-100">
+          <h3 className="text-sm font-semibold text-[color:var(--color-text)]">{title}</h3>
+          <span className="text-[10px] px-2 py-0.5 rounded-full bg-primary-50 text-primary-700 border border-primary-100">
             #{index + 1}
           </span>
         </div>
-        <p className="mt-1 text-xs text-gray-600">{subtitle}</p>
+        <p className="mt-1 text-xs text-[color:var(--color-text-muted)]">{subtitle}</p>
 
         {/* Alignment demo area */}
         {align && (
-          <div className="mt-3 border border-dashed border-gray-200 rounded-md p-3">
+          <div className="mt-3 border border-dashed border-subtle rounded-md p-3">
             <div
               className={`grid grid-cols-3 gap-2 h-20 place-items-${align}`}
               aria-label={`alignment-${align}`}
             >
-              <div className="h-6 w-6 rounded bg-blue-100 border border-blue-200" />
-              <div className="h-6 w-6 rounded bg-amber-100 border border-amber-200" />
-              <div className="h-6 w-6 rounded bg-gray-100 border border-gray-200" />
+              <div className="h-6 w-6 rounded bg-primary-100 border border-primary-200" />
+              <div className="h-6 w-6 rounded bg-amberAccent-100 border border-amberAccent-200" />
+              <div className="h-6 w-6 rounded bg-gray-100 border border-strong" />
             </div>
           </div>
         )}
@@ -51,12 +51,12 @@ export default function GridCard({
         {/* Nested grid demo */}
         {nested && (
           <div className="mt-3">
-            <div className="text-[10px] text-gray-500 mb-1">Nested grid</div>
+            <div className="text-[10px] text-[color:var(--color-text-muted)] mb-1">Nested grid</div>
             <div className="grid grid-cols-2 gap-2">
               {Array.from({ length: 4 }).map((_, i) => (
                 <div
                   key={i}
-                  className="h-10 rounded-md bg-gradient-to-br from-blue-50 to-amber-50 border border-gray-200"
+                  className="h-10 rounded-md bg-gradient-to-br from-primary-50 to-amberAccent-50 border border-subtle"
                 />
               ))}
             </div>

@@ -30,7 +30,7 @@ export default function GridCanvas({ config, styles }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-10">
         {/* SECTION: Resizable canvas wrapper */}
         <div
-          className="w-full bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm transition-colors"
+          className="w-full bg-white border border-subtle rounded-lg overflow-hidden shadow-sm transition-colors"
           role="region"
           aria-label="Resizable grid preview"
         >
@@ -42,8 +42,8 @@ export default function GridCanvas({ config, styles }) {
             >
               <div className="p-4">
                 <header className="mb-3">
-                  <h2 className="text-sm font-medium text-gray-800">Auto grid</h2>
-                  <p className="text-xs text-gray-600">
+                  <h2 className="text-sm font-medium text-[color:var(--color-text)]">Auto grid</h2>
+                  <p className="text-xs text-[color:var(--color-text-muted)]">
                     Using repeat({config.columns}, minmax(0, 1fr)) and gap {config.gap}px
                   </p>
                 </header>
@@ -102,20 +102,20 @@ export default function GridCanvas({ config, styles }) {
               aria-valuenow={leftWidth}
               aria-label="Resize preview width"
             >
-              <div className="absolute inset-y-0 left-0 w-px bg-gray-200 group-hover:bg-blue-300 transition-colors" />
+              <div className="absolute inset-y-0 left-0 w-px bg-[color:var(--color-border-subtle)] group-hover:bg-primary-300 transition-colors" />
               <div className="absolute inset-y-0 -left-1 right-0 opacity-0 group-hover:opacity-100 transition-opacity">
-                <div className="absolute inset-y-0 left-0 right-0 bg-blue-500/5" />
+                <div className="absolute inset-y-0 left-0 right-0 bg-primary-500/5" />
               </div>
             </div>
 
             {/* Right: explanatory panel */}
             <div className="flex-1 min-w-0 p-4">
-              <h3 className="text-sm font-medium text-gray-800 mb-2">Resize me</h3>
-              <p className="text-xs text-gray-600">
+              <h3 className="text-sm font-medium text-[color:var(--color-text)] mb-2">Resize me</h3>
+              <p className="text-xs text-[color:var(--color-text-muted)]">
                 Drag the separator, use arrow keys when focused (Shift for larger steps), or use
                 Home/End for min/max width. This simulates different container widths.
               </p>
-              <div className="mt-3 rounded-md border border-gray-200 bg-gray-50 text-xs text-gray-700 p-3">
+              <div className="mt-3 rounded-md border border-subtle bg-gray-50 text-xs text-[color:var(--color-text-subtle)] p-3">
                 <div>Current preview width: <span className="font-medium">{Math.round(leftWidth)}px</span></div>
               </div>
             </div>
@@ -125,8 +125,8 @@ export default function GridCanvas({ config, styles }) {
         {/* SECTION: Responsive spans */}
         <div>
           <header className="mb-3">
-            <h2 className="text-sm font-medium text-gray-800">Responsive spans</h2>
-            <p className="text-xs text-gray-600">
+            <h2 className="text-sm font-medium text-[color:var(--color-text)]">Responsive spans</h2>
+            <p className="text-xs text-[color:var(--color-text-muted)]">
               Each card demonstrates col-span behavior across breakpoints.
             </p>
           </header>
@@ -160,8 +160,8 @@ export default function GridCanvas({ config, styles }) {
         {/* SECTION: Alignment variants */}
         <div>
           <header className="mb-3">
-            <h2 className="text-sm font-medium text-gray-800">Alignment variants</h2>
-            <p className="text-xs text-gray-600">
+            <h2 className="text-sm font-medium text-[color:var(--color-text)]">Alignment variants</h2>
+            <p className="text-xs text-[color:var(--color-text-muted)]">
               place-items controls both align-items and justify-items in the grid.
             </p>
           </header>
@@ -188,8 +188,8 @@ export default function GridCanvas({ config, styles }) {
         {/* SECTION: Gap presets & row heights */}
         <div>
           <header className="mb-3">
-            <h2 className="text-sm font-medium text-gray-800">Gap & row height</h2>
-            <p className="text-xs text-gray-600">
+            <h2 className="text-sm font-medium text-[color:var(--color-text)]">Gap & row height</h2>
+            <p className="text-xs text-[color:var(--color-text-muted)]">
               Preview different gaps; the global control above still applies to other sections.
             </p>
           </header>
@@ -197,7 +197,7 @@ export default function GridCanvas({ config, styles }) {
           <div className="space-y-6">
             {GAP_PRESETS.slice(0, 5).map((gp, gi) => (
               <div key={`gap-${gp.id}`}>
-                <div className="text-[11px] text-gray-600 mb-2">gap: {gp.id}px • row: {Math.max(60, Math.min(200, config.rowHeight))}px</div>
+                <div className="text-[11px] text-[color:var(--color-text-muted)] mb-2">gap: {gp.id}px • row: {Math.max(60, Math.min(200, config.rowHeight))}px</div>
                 <div
                   className="grid"
                   style={{
@@ -224,8 +224,8 @@ export default function GridCanvas({ config, styles }) {
         {/* SECTION: Breakpoint preview legend */}
         <div>
           <header className="mb-3">
-            <h2 className="text-sm font-medium text-gray-800">Breakpoints</h2>
-            <p className="text-xs text-gray-600">
+            <h2 className="text-sm font-medium text-[color:var(--color-text)]">Breakpoints</h2>
+            <p className="text-xs text-[color:var(--color-text-muted)]">
               These are Tailwind’s default breakpoints. Resize the window to test responsiveness.
             </p>
           </header>
@@ -233,10 +233,10 @@ export default function GridCanvas({ config, styles }) {
             {BREAKPOINTS.map((bp) => (
               <div
                 key={bp.id}
-                className="rounded-md border border-gray-200 bg-white p-3 text-xs text-gray-700 flex items-center justify-between"
+                className="rounded-md border border-subtle bg-white p-3 text-xs text-[color:var(--color-text-subtle)] flex items-center justify-between"
               >
                 <span className="font-medium">{bp.id}</span>
-                <span className="text-gray-500">{bp.label}</span>
+                <span className="text-[color:var(--color-text-muted)]">{bp.label}</span>
               </div>
             ))}
           </div>

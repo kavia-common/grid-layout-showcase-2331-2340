@@ -13,7 +13,7 @@ export default function ControlPanel({
   /** Panel for controlling grid configuration. */
   return (
     <section
-      className="w-full bg-white border-b border-gray-200"
+      className="w-full bg-white border-b border-subtle"
       role="region"
       aria-label="Grid controls"
     >
@@ -45,36 +45,29 @@ export default function ControlPanel({
           />
 
           <div className="flex items-center gap-2 ml-auto">
-            <label className="flex items-center gap-2 text-sm text-gray-700">
+            <label className="flex items-center gap-2 text-sm text-[color:var(--color-text-subtle)]">
               <input
                 type="checkbox"
                 checked={config.responsive}
                 onChange={toggleResponsive}
-                className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                className="rounded border-[color:var(--color-border-strong)] text-primary-600 focus:ring-[color:var(--color-primary)]"
                 aria-label="Toggle responsive behavior"
               />
               Responsive
             </label>
-            <label className="flex items-center gap-2 text-sm text-gray-700">
+            <label className="flex items-center gap-2 text-sm text-[color:var(--color-text-subtle)]">
               <input
                 type="checkbox"
                 checked={config.showGuides}
                 onChange={toggleGuides}
-                className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                className="rounded border-[color:var(--color-border-strong)] text-primary-600 focus:ring-[color:var(--color-primary)]"
                 aria-label="Toggle column guides"
               />
               Show guides
             </label>
+            <div className="hidden md:block h-8 w-px bg-[color:var(--color-border-subtle)] mx-2" aria-hidden />
             <div
-              className="hidden md:block h-8 w-px bg-gray-200 mx-2"
-              aria-hidden
-            />
-            <div
-              className="hidden md:flex items-center gap-2 text-xs text-gray-600 px-3 py-1.5 rounded-md border border-gray-200 bg-white transition-shadow"
-              style={{
-                boxShadow:
-                  "inset 0 0 0 1px rgba(255,255,255,0.6), 0 1px 2px rgba(0,0,0,0.04)"
-              }}
+              className="hidden md:flex items-center gap-2 text-xs text-[color:var(--color-text-muted)] px-3 py-1.5 rounded-md border border-subtle bg-white transition-shadow shadow-xs"
             >
               <span
                 className="inline-block h-3 w-3 rounded-full"
@@ -136,7 +129,7 @@ function Field({ id, label, value, onChange, min, max }) {
 
   return (
     <div className="flex flex-col">
-      <label htmlFor={id} className="text-xs text-gray-500 mb-1">
+      <label htmlFor={id} className="text-xs text-[color:var(--color-text-muted)] mb-1">
         {label}
       </label>
       <input
@@ -148,7 +141,7 @@ function Field({ id, label, value, onChange, min, max }) {
         onChange={onInputChange}
         onKeyDown={onKeyDown}
         aria-describedby={describedBy}
-        className="w-36 text-sm rounded-md border border-gray-300 px-2 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition"
+        className="w-36 text-sm rounded-md border border-subtle px-2 py-1.5 focus:border-primary-600 transition"
       />
       <span id={describedBy} className="sr-only">
         Use arrow keys to adjust. Shift plus arrow changes faster.
