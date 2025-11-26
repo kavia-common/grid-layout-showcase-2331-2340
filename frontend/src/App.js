@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import "./App.css";
 import "./index.css";
 import Navbar from "./components/Navbar.jsx";
@@ -14,22 +14,38 @@ function App() {
    * - Ocean themed layout with Navbar, ControlPanel, GridCanvas, and Footer.
    * - Theme toggle controls a data attribute that can be used for future dark mode.
    */
-  const [theme, setTheme] = useState("light");
+  const systemPrefersDark = useMemo(
+    () => window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches,
+    []
+  );
+  const [theme, setTheme] = useState(() => {
+    try {
+      return localStorage.getItem("app-theme") || (systemPrefersDark ? "dark" : "light");
+    } catch {
+      return "light";
+    }
+  });
+
   const { config, styles, setColumns, setGap, setRowHeight, toggleResponsive, toggleGuides } =
     useGridState();
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
+    try {
+      localStorage.setItem("app-theme", theme);
+    } catch {
+      // ignore
+    }
   }, [theme]);
 
   // PUBLIC_INTERFACE
   const toggleTheme = () => setTheme((t) => (t === "light" ? "dark" : "light"));
 
   return (
-    <div className="min-h-screen flex flex-col bg-ocean-soft">
+    <div className="min-h-screen flex flex-col bg-ocean-soft transition-colors">
       <Navbar theme={theme} onToggleTheme={toggleTheme} />
 
-      <main className="flex-1">
+      <main className="flex-1" role="main" aria-label="Grid layout showcase main content">
         <div className="bg-gradient-to-br from-blue-500/10 to-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
             <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900">

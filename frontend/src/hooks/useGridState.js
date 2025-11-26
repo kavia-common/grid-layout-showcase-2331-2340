@@ -5,13 +5,13 @@ import { DEFAULT_GRID_CONFIG } from "../utils/constants";
 export function useGridState(initialConfig = DEFAULT_GRID_CONFIG) {
   /**
    * Hook to manage grid layout configuration and UI flags.
-   * - Persists to sessionStorage to survive reloads per session.
+   * - Persists to localStorage to survive browser restarts.
    * - Provides validated setters with bounds checking.
    */
   const storageKey = "grid-config";
   const [config, setConfig] = useState(() => {
     try {
-      const raw = sessionStorage.getItem(storageKey);
+      const raw = localStorage.getItem(storageKey);
       return raw ? { ...initialConfig, ...JSON.parse(raw) } : initialConfig;
     } catch {
       return initialConfig;
@@ -29,7 +29,7 @@ export function useGridState(initialConfig = DEFAULT_GRID_CONFIG) {
   // Persist
   useEffect(() => {
     try {
-      sessionStorage.setItem(storageKey, JSON.stringify(config));
+      localStorage.setItem(storageKey, JSON.stringify(config));
     } catch {
       // ignore persistence failures
     }
