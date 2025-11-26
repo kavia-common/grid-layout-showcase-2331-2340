@@ -31,4 +31,5 @@
   .bg-surface { @apply bg-surface; }
   .text-body { @apply text-text; }
   .bg-app-gradient { @apply bg-gradient-to-br from-blue-500/10 to-gray-50; }
+  .bg-ocean-soft { @apply bg-gradient-to-br from-blue-500/10 to-gray-50; }
 }

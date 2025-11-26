@@ -1,47 +1,60 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import "./App.css";
+import "./index.css";
+import Navbar from "./components/Navbar.jsx";
+import ControlPanel from "./components/ControlPanel.jsx";
+import GridCanvas from "./components/GridCanvas.jsx";
+import Footer from "./components/Footer.jsx";
+import { useGridState } from "./hooks/useGridState";
 
 // PUBLIC_INTERFACE
 function App() {
-  const [theme, setTheme] = useState('light');
+  /**
+   * App root rendering:
+   * - Ocean themed layout with Navbar, ControlPanel, GridCanvas, and Footer.
+   * - Theme toggle controls a data attribute that can be used for future dark mode.
+   */
+  const [theme, setTheme] = useState("light");
+  const { config, styles, setColumns, setGap, setRowHeight, toggleResponsive, toggleGuides } =
+    useGridState();
 
-  // Effect to apply theme to document element
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
   // PUBLIC_INTERFACE
-  const toggleTheme = () => {
-    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
-  };
+  const toggleTheme = () => setTheme((t) => (t === "light" ? "dark" : "light"));
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <button 
-          className="theme-toggle" 
-          onClick={toggleTheme}
-          aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-        >
-          {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
-        </button>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>
-          Current theme: <strong>{theme}</strong>
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="min-h-screen flex flex-col bg-ocean-soft">
+      <Navbar theme={theme} onToggleTheme={toggleTheme} />
+
+      <main className="flex-1">
+        <div className="bg-gradient-to-br from-blue-500/10 to-gray-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+            <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900">
+              Grid Layout Showcase
+            </h1>
+            <p className="mt-2 text-sm text-gray-600 max-w-2xl">
+              Experiment with a responsive grid. Adjust columns, gaps, and row height. Cards below
+              update instantly.
+            </p>
+          </div>
+        </div>
+
+        <ControlPanel
+          config={config}
+          setColumns={setColumns}
+          setGap={setGap}
+          setRowHeight={setRowHeight}
+          toggleResponsive={toggleResponsive}
+          toggleGuides={toggleGuides}
+        />
+
+        <GridCanvas config={config} styles={styles} />
+      </main>
+
+      <Footer />
     </div>
   );
 }
